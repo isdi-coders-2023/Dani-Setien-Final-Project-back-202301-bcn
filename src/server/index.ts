@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import morgan from "morgan";
-import { generalError } from "../../middlewares/GeneralError/GeneralError";
+import { generalError } from "../middlewares/generalError/generalError";
 
 export const app = express();
 app.disable("x-powered-by");
