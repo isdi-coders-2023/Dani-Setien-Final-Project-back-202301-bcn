@@ -1,7 +1,8 @@
 import express from "express";
 import cors from "cors";
 import morgan from "morgan";
-import { generalError } from "../middlewares/generalError/generalError";
+import { notFoundError } from "../middlewares/notFoundError/notFoundError.js";
+import { generalError } from "../middlewares/generalError/generalError.js";
 
 export const app = express();
 app.disable("x-powered-by");
@@ -18,4 +19,5 @@ const corsOptions: cors.CorsOptions = {
 app.use(cors(corsOptions));
 app.use(morgan("dev"));
 
+app.use("/", notFoundError);
 app.use("/", generalError);
