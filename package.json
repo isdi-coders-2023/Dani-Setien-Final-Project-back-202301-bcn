@@ -5,15 +5,25 @@
   "main": "dist/index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky install"
+    "build": "npx tsc",
+    "build:dev": "npx tsc -w",
+    "start": "node dist/index.js",
+    "start:dev": "node --watch dist/index.js",
+    "prepare": "husky install  && chmod ug+x .husky/*",
+    "eslint-audit": "npx eslint --ignore-path .gitignore . --max-warnings 0",
+    "test": "npx jest",
+    "test:dev": "npx jest --watch",
+    "test:coverage": "npx jest --coverage --watchAll=false"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/jest": "^29.4.0",
     "husky": "^8.0.0",
+    "jest-ts-webcompat-resolver": "^1.0.0",
     "lint-staged": "^13.1.2",
-    "prettier": "^2.8.4"
+    "prettier": "^2.8.4",
+    "ts-jest": "^29.0.5"
   }
 }
