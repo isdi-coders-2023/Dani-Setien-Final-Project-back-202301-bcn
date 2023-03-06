@@ -1,7 +1,7 @@
 import "./loadEnvironments.js";
 import createDebug from "debug";
-import { startServer } from "./server/routers/startServer.js";
 import connectDatabase from "./database/connectDatabase.js";
+import { startServer } from "./server/startServer.js";
 
 const debug = createDebug("bb:root");
 
