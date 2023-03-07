@@ -6,3 +6,8 @@ export interface CustomLoginRequest extends Request {
     password: string;
   };
 }
+
+export interface UserCredentials {
+  email: string;
+  password: string;
+}
