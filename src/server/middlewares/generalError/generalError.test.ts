@@ -1,7 +1,7 @@
 import { type Response } from "express";
 import { CustomError } from "../../../CustomError/CustomError";
 import { mockNext, mockRequest, mockResponse } from "../../../mocks/mocks";
-import { generalError } from "./chancho";
+import { generalError } from "./generalError";
 
 describe("Given a generalError function", () => {
   describe("When it receives an error with status code 501", () => {
