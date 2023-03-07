@@ -1,5 +1,6 @@
 import { type Response } from "express";
-import { mockNext, mockRequest, mockResponse } from "../../mocks/mocks";
+import { mockNext, mockRequest, mockResponse } from "../../../mocks/mocks";
+
 import ping from "./ping";
 
 describe("Given a ping middleware", () => {

@@ -1,6 +1,6 @@
 import { type Response } from "express";
-import { CustomError } from "../../CustomError/CustomError";
-import { mockNext, mockRequest, mockResponse } from "../../mocks/mocks";
+import { CustomError } from "../../../CustomError/CustomError";
+import { mockNext, mockRequest, mockResponse } from "../../../mocks/mocks";
 import { generalError } from "./generalError";
 
 describe("Given a generalError function", () => {
