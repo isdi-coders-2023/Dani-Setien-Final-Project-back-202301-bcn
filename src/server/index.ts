@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import { notFoundError } from "./middlewares/notFoundError/notFoundError.js";
-import { generalError } from "./middlewares/chancho/chancho.js";
+import { generalError } from "./middlewares/generalError/generalError.js";
 import ping from "./middlewares/ping/ping.js";
 
 export const app = express();

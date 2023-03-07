@@ -3,7 +3,7 @@ import createDebug from "debug";
 import connectDatabase from "./database/connectDatabase.js";
 import { startServer } from "./server/startServer.js";
 
-const debug = createDebug("bb:root");
+const debug = createDebug("brushbids-back:root");
 
 const port = process.env.PORT! || 4000;
 
