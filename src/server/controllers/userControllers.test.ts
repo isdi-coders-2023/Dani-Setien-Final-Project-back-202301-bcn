@@ -8,6 +8,7 @@ import { type UserCredentials } from "../../types";
 import { loginUser } from "./userControllers";
 
 beforeEach(() => jest.clearAllMocks());
+afterEach(() => jest.clearAllMocks());
 
 describe("Given a loginUser controller", () => {
   describe("When it receives a request with an email 'unregistered@gmail.com' and password 'unimportant'", () => {
@@ -100,26 +101,19 @@ describe("Given a loginUser controller", () => {
 
   describe("When it receives a request but there's an Internal Server Error during the login process", () => {
     test("Then it should signal so with an 'Internal Server Error.' public and private message and a status 500", async () => {
-      const mockRegisteredUser: UserCredentials = {
-        email: "registered@gmail.com",
-        password: "correctPassword",
-      };
-
-      const thrownError = new CustomError(
-        "Internal Server Error",
+      const customError = new CustomError(
+        "Internal server error",
         500,
-        "Internal Server Error."
+        "Internal server error"
       );
 
-      mockRequest.body = mockRegisteredUser;
-
-      User.findOne = () => {
-        throw new Error("Internal Server Error");
-      };
+      User.findOne = jest.fn().mockImplementationOnce(() => {
+        throw new Error("Internal server error");
+      });
 
       await loginUser(mockRequest, mockResponse as Response, mockNext);
 
-      expect(mockNext).toHaveBeenCalledWith(thrownError);
+      expect(mockNext).toHaveBeenCalledWith(customError);
     });
   });
 });
