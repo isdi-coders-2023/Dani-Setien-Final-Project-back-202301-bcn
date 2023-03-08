@@ -43,10 +43,8 @@ export const loginUser = async (
 
     res.status(200).json({ token });
   } catch (error: unknown) {
-    const caughtError = error as Error;
-
     const thrownError = new CustomError(
-      caughtError.message,
+      (error as Error).message,
       500,
       "Internal Server Error."
     );
