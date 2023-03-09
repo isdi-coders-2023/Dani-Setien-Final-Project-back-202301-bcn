@@ -33,8 +33,11 @@ export const loginUser = async (
       return;
     }
 
+    const { username } = user;
+
     const jwtPayload = {
-      sub: user._id,
+      username,
+      id: user._id,
     };
 
     const token = jwt.sign(jwtPayload, process.env.JWT_SECRET!, {

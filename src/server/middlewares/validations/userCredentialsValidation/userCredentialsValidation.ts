@@ -9,7 +9,7 @@ const userCredentialsValidation = (
   next: NextFunction
 ) => {
   const credentialsValidation = Joi.object({
-    email: Joi.string().email().min(8).max(24).required(),
+    email: Joi.string().email().min(8).required(),
     password: Joi.string().alphanum().min(8).max(32).required(),
   });
 
