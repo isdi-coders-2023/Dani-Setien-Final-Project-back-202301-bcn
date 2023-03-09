@@ -1,6 +1,6 @@
 import { type NextFunction, type Request, type Response } from "express";
 
-export const mockRequest = {} as Request;
+export const mockRequest: Request = {} as Request;
 
 export const mockNext: NextFunction = jest.fn();
 

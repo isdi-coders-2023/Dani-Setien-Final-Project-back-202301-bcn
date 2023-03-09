@@ -9,7 +9,7 @@ const userCredentialsValidation = (
   next: NextFunction
 ) => {
   const credentialsValidation = Joi.object({
-    email: Joi.string().alphanum().min(8).max(24).required(),
+    email: Joi.string().email().min(8).max(24).required(),
     password: Joi.string().alphanum().min(8).max(32).required(),
   });
 
@@ -22,8 +22,8 @@ const userCredentialsValidation = (
 
   if (invalidCredentials) {
     const userFeedbackMessages = invalidCredentials.details
-      .map((detail) => detail.message)
-      .join(" & ");
+      .map((detail) => detail.message.replaceAll(`"`, ""))
+      .join(" and ");
 
     const invalidCredentialsError = new CustomError(
       "Invalid user credentials",
