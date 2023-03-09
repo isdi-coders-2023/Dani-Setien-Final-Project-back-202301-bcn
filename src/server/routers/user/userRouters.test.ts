@@ -115,18 +115,18 @@ describe("Given a POST users/login endpoint", () => {
     });
   });
 
-  describe("When it receives a request with name 'unregistered' and password 'iAmLost'", () => {
+  describe("When it receives a request with name 'unregistered@email.com' and password 'iAmLostHere'", () => {
     test("Then it should respond with status 401 and an error message", async () => {
       const expectedStatusCode = 401;
-      const inexistentUserName = "unregistered";
-      const password = "iAmLost";
+      const unregisteredEmail = "unregistered@email.com";
+      const password = "iAmLostHere";
       const expectedResponse = {
         error:
           "The combination loginname and password is incorrect, please try again.",
       };
 
       const userCredentials = {
-        username: inexistentUserName,
+        email: unregisteredEmail,
         password,
       };
 

@@ -11,7 +11,6 @@ module.exports = {
           "error",
           "interface",
         ],
-        "@typescript-eslint/consistent-type-assertions": "off",
       },
       extends: ["xo-typescript", "prettier"],
       files: ["*.ts", "*.tsx"],
@@ -19,6 +18,10 @@ module.exports = {
     {
       files: ["src/**/models/**/*.ts"],
       rules: { "@typescript-eslint/naming-convention": "off" },
+    },
+    {
+      files: ["src/**/mocks/**/*.ts"],
+      rules: { "@typescript-eslint/consistent-type-assertions": "off" },
     },
   ],
   parserOptions: {
