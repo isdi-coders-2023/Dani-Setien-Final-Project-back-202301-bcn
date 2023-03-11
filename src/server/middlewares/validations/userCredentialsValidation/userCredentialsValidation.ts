@@ -1,4 +1,4 @@
-import { type NextFunction, type Request, type Response } from "express";
+import { type NextFunction, type Response } from "express";
 import { Joi } from "express-validation";
 import { CustomError } from "../../../../CustomError/CustomError.js";
 import { type CustomLoginRequest } from "../../../../types.js";

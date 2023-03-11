@@ -1,10 +1,10 @@
 import { type Response } from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { CustomError } from "../../CustomError/CustomError";
-import { User } from "../../database/models/UserSchema";
-import { mockNext, mockRequest, mockResponse } from "../../mocks/mocks";
-import { type UserCredentials } from "../../types";
+import { CustomError } from "../../../CustomError/CustomError";
+import { User } from "../../../database/models/UserSchema";
+import { mockNext, mockRequest, mockResponse } from "../../../mocks/mocks";
+import { type UserCredentials } from "../../../types";
 import { loginUser } from "./userControllers";
 
 beforeEach(() => jest.clearAllMocks());
