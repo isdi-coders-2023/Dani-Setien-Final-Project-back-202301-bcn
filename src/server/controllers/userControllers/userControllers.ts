@@ -1,4 +1,4 @@
-import "../../loadEnvironments.js";
+import "../../../loadEnvironments.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { type Response, type NextFunction } from "express";

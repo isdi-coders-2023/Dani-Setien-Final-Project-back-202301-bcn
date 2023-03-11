@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
 
-export const PaintingSchema = new mongoose.Schema({
+export const PaintingSchema = new Schema({
   author: {
     type: String,
     required: true,
@@ -13,7 +13,7 @@ export const PaintingSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  collection: {
+  gallery: {
     type: String,
     required: true,
   },
@@ -62,4 +62,4 @@ export const PaintingSchema = new mongoose.Schema({
   },
 });
 
-export const Painting = mongoose.model("painting", PaintingSchema, "paintings");
+export const Painting = model("painting", PaintingSchema, "paintings");
