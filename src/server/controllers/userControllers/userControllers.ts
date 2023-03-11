@@ -2,10 +2,10 @@ import "../../loadEnvironments.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { type Response, type NextFunction } from "express";
-import { type CustomLoginRequest } from "../../types.js";
-import { User } from "../../database/models/UserSchema.js";
-import { rejectedLogin } from "../middlewares/rejectedLogin/rejectedLogin.js";
-import { CustomError } from "../../CustomError/CustomError.js";
+import { type CustomLoginRequest } from "../../../types.js";
+import { User } from "../../../database/models/UserSchema.js";
+import { rejectedLogin } from "../../middlewares/rejectedLogin/rejectedLogin.js";
+import { CustomError } from "../../../CustomError/CustomError.js";
 
 export const loginUser = async (
   req: CustomLoginRequest,
