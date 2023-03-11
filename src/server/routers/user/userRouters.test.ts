@@ -35,7 +35,7 @@ const mockUser: UserStructure = {
 };
 
 describe("Given a POST users/login endpoint", () => {
-  const endpoint = "/user/login";
+  const loginEndpoint = "/user/login";
 
   describe("When it receives a request with name 'felix' and password 'wrongPassword'", () => {
     beforeAll(async () => {
@@ -68,7 +68,7 @@ describe("Given a POST users/login endpoint", () => {
       };
 
       const response = await request(app)
-        .post(endpoint)
+        .post(loginEndpoint)
         .send(userCredentials)
         .expect(expectedStatusCode);
 
@@ -107,7 +107,7 @@ describe("Given a POST users/login endpoint", () => {
       });
 
       const response = await request(app)
-        .post(endpoint)
+        .post(loginEndpoint)
         .send(userCredentials)
         .expect(expectedStatusCode);
 
@@ -131,7 +131,7 @@ describe("Given a POST users/login endpoint", () => {
       };
 
       const response = await request(app)
-        .post(endpoint)
+        .post(loginEndpoint)
         .send(userCredentials)
         .expect(expectedStatusCode);
 

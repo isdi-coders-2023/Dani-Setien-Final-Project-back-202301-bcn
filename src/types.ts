@@ -20,7 +20,7 @@ export interface Painting {
   author: string;
   name: string;
   year: string;
-  collection: string;
+  gallery: string;
   technique: string;
   size: string;
   medium: string;
