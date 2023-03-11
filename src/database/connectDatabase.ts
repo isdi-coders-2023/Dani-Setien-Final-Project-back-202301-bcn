@@ -4,6 +4,13 @@ const connectDatabase = async (url: string) => {
   mongoose.set("strictQuery", false);
   mongoose.set("debug", true);
 
+  mongoose.set("toJSON", {
+    virtuals: true,
+    transform(doc, converted) {
+      delete converted._id;
+    },
+  });
+
   try {
     await mongoose.connect(url);
   } catch (error) {
