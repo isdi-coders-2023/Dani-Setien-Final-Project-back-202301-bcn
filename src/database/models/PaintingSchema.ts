@@ -60,6 +60,12 @@ export const PaintingSchema = new Schema({
   image: {
     type: String,
   },
+  width: {
+    type: Number,
+  },
+  height: {
+    type: Number,
+  },
 });
 
 export const Painting = model("painting", PaintingSchema, "paintings");
