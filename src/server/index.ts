@@ -10,10 +10,10 @@ import paintingsRouter from "./routers/paintingsRouters/paintingsRouters.js";
 export const app = express();
 app.disable("x-powered-by");
 
-const allowedOrigins = [
-  "http://localhost:4000",
-  "https://dani-setien-final-project-front-202301-bcn.vercel.app/",
-];
+const localUrl = process.env.LOCAL_URL!;
+const productionUrl = process.env.PRODUCTION_URL!;
+
+const allowedOrigins = [localUrl, productionUrl];
 
 const corsOptions: cors.CorsOptions = {
   origin: allowedOrigins,
