@@ -24,7 +24,7 @@ export const getPaintingById = async (
   const { idPainting } = req.params;
 
   try {
-    const painting = await Painting.findById(idPainting);
+    const painting = await Painting.findById(idPainting).exec();
 
     res.status(200).json({ painting });
   } catch (error: unknown) {

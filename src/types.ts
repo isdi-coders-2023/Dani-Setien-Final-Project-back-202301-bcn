@@ -38,3 +38,10 @@ export interface Painting {
 }
 
 export type Paintings = Painting[];
+
+export interface CustomMongoResponse {
+  id: string;
+}
+export interface MongoInsertManyReturnedValue {
+  object: CustomMongoResponse[];
+}
