@@ -4,8 +4,8 @@ import jwt from "jsonwebtoken";
 import { type Response, type NextFunction } from "express";
 import { type CustomLoginRequest } from "../../../types.js";
 import { User } from "../../../database/models/UserSchema.js";
-import { rejectedLogin } from "../../middlewares/rejectedLogin/rejectedLogin.js";
 import { CustomError } from "../../../CustomError/CustomError.js";
+import { handleLoginRejections } from "../../middlewares/handleLoginRejections/handleLoginRejections.js";
 
 export const loginUser = async (
   req: CustomLoginRequest,
@@ -19,7 +19,7 @@ export const loginUser = async (
 
     if (!user) {
       const reasonForRejection = "email";
-      rejectedLogin(reasonForRejection, next);
+      handleLoginRejections(reasonForRejection, next);
 
       return;
     }
@@ -28,7 +28,7 @@ export const loginUser = async (
 
     if (!loginSuccess) {
       const reasonForRejection = "password";
-      rejectedLogin(reasonForRejection, next);
+      handleLoginRejections(reasonForRejection, next);
 
       return;
     }
