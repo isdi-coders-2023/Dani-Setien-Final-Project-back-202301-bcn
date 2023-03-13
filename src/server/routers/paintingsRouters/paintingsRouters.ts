@@ -1,8 +1,12 @@
 import { Router } from "express";
-import { getPaintings } from "../../controllers/paintingControllers/paintingControllers.js";
+import {
+  getPaintingById,
+  getPaintings,
+} from "../../controllers/paintingControllers/paintingControllers.js";
 
 const paintingsRouter = Router();
 
 paintingsRouter.get("/", getPaintings);
+paintingsRouter.get("/:idPainting", getPaintingById);
 
 export default paintingsRouter;

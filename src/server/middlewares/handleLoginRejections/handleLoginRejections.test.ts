@@ -1,8 +1,12 @@
 import { CustomError } from "../../../CustomError/CustomError";
 import { mockNext } from "../../../mocks/mocks";
-import { rejectedLogin } from "./rejectedLogin";
+import { handleLoginRejections } from "./handleLoginRejections";
 
-describe("Given a rejectedLogin function", () => {
+afterEach(() => {
+  jest.clearAllMocks();
+});
+
+describe("Given a handleLoginRejections function", () => {
   describe("When it is called with a rejection reason 'password'", () => {
     test("Then it should pass on an error that includes the rejection reason 'password'", () => {
       const reasonForRejection = "password";
@@ -13,7 +17,7 @@ describe("Given a rejectedLogin function", () => {
         "The combination loginname and password is incorrect, please try again."
       );
 
-      rejectedLogin(reasonForRejection, mockNext);
+      handleLoginRejections(reasonForRejection, mockNext);
 
       expect(mockNext).toHaveBeenCalledWith(invalidUsernamePassword);
     });

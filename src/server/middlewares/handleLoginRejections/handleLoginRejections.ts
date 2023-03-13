@@ -1,7 +1,7 @@
 import { type NextFunction } from "express";
 import { CustomError } from "../../../CustomError/CustomError.js";
 
-export const rejectedLogin = (
+export const handleLoginRejections = (
   reasonForRejection: string,
   next: NextFunction
 ) => {

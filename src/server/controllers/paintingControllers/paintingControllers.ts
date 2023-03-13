@@ -1,6 +1,6 @@
 import { type NextFunction, type Request, type Response } from "express";
-import { CustomError } from "../../../CustomError/CustomError.js";
 import { Painting } from "../../../database/models/PaintingSchema.js";
+import handlePaintingErrors from "../../middlewares/handlePaintingErrors/handlePaintingErrors.js";
 
 export const getPaintings = async (
   req: Request,
@@ -12,12 +12,22 @@ export const getPaintings = async (
 
     res.status(200).json({ paintings });
   } catch (error: unknown) {
-    const thrownError = new CustomError(
-      (error as Error).message,
-      500,
-      "Internal Server Error."
-    );
+    handlePaintingErrors(next, (error as Error).message);
+  }
+};
 
-    next(thrownError);
+export const getPaintingById = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { idPainting } = req.params;
+
+  try {
+    const painting = await Painting.findById(idPainting).exec();
+
+    res.status(200).json({ painting });
+  } catch (error: unknown) {
+    handlePaintingErrors(next, (error as Error).message);
   }
 };

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
 import request from "supertest";
 import mongoose from "mongoose";
 import { MongoMemoryServer } from "mongodb-memory-server";
@@ -5,6 +6,7 @@ import connectDatabase from "../../../database/connectDatabase";
 import { app } from "../..";
 import { Painting } from "../../../database/models/PaintingSchema";
 import { mockPaintings } from "../../../mocks/mocks";
+import { type MongoInsertManyReturnedValue } from "../../../types";
 
 let server: MongoMemoryServer;
 
@@ -42,6 +44,34 @@ describe("Given a GET paintings/ endpoint", () => {
       await request(app)
         .get(getPaintingsEndpoint)
         .expect(expectedStatusResponse);
+    });
+  });
+
+  describe("When it receives a request to get a painting with id '1'", () => {
+    const mongoReturnedDocument = {
+      object: "" as unknown,
+    };
+
+    beforeEach(async () => {
+      mongoReturnedDocument.object = await Painting.insertMany(
+        mockPaintings[0]
+      );
+    });
+
+    test("Then it should respond with a painting with id '1'", async () => {
+      const expectedPaintingsResponse = mockPaintings[0];
+
+      const paintingId = (mongoReturnedDocument as MongoInsertManyReturnedValue)
+        .object[0].id as string;
+
+      const getPaintingByIdFullRoute = `${getPaintingsEndpoint}${paintingId}`;
+
+      const response = await request(app).get(getPaintingByIdFullRoute);
+
+      delete response.body.painting.id;
+      delete response.body.painting.__v;
+
+      expect(response.body.painting).toStrictEqual(expectedPaintingsResponse);
     });
   });
 });
