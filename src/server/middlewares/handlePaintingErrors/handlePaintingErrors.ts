@@ -8,7 +8,7 @@ const handlePaintingErrors = (
   const fetchPaintingError = new CustomError(
     errorMessage,
     500,
-    "Internal Server Error"
+    "Internal Server Error."
   );
 
   next(fetchPaintingError);
