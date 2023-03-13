@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
 import request from "supertest";
 import mongoose from "mongoose";
 import { MongoMemoryServer } from "mongodb-memory-server";
@@ -6,7 +5,9 @@ import connectDatabase from "../../../database/connectDatabase";
 import { app } from "../..";
 import { Painting } from "../../../database/models/PaintingSchema";
 import { mockPaintings } from "../../../mocks/mocks";
+import { deleteDatabaseInsertedUnpredictableProperties } from "../../../utils/testUtils";
 import { type MongoInsertManyReturnedValue } from "../../../types";
+import { type SupertestPaintingRequestResponse } from "../../../utils/testUtils/types";
 
 let server: MongoMemoryServer;
 
@@ -31,10 +32,17 @@ describe("Given a GET paintings/ endpoint", () => {
     test("Then it should respond with a list of 2 paintings", async () => {
       const expectedPaintingsResponse = mockPaintings;
 
-      const response = await request(app).get(getPaintingsEndpoint);
+      const response: SupertestPaintingRequestResponse = await request(app).get(
+        getPaintingsEndpoint
+      );
 
-      expect(response.body.paintings.length).toBe(
-        expectedPaintingsResponse.length
+      const predictablePaintingsResponse = response.body.paintings.map(
+        (paintingResponse) =>
+          deleteDatabaseInsertedUnpredictableProperties(paintingResponse)
+      );
+
+      expect(predictablePaintingsResponse).toStrictEqual(
+        expectedPaintingsResponse
       );
     });
 
@@ -47,7 +55,7 @@ describe("Given a GET paintings/ endpoint", () => {
     });
   });
 
-  describe("When it receives a request to get a painting with id '1'", () => {
+  describe("When it receives a request to get a painting with a given id", () => {
     const mongoReturnedDocument = {
       object: "" as unknown,
     };
@@ -58,20 +66,24 @@ describe("Given a GET paintings/ endpoint", () => {
       );
     });
 
-    test("Then it should respond with a painting with id '1'", async () => {
+    test("Then it should respond with that particular painting", async () => {
       const expectedPaintingsResponse = mockPaintings[0];
 
       const paintingId = (mongoReturnedDocument as MongoInsertManyReturnedValue)
-        .object[0].id as string;
+        .object[0].id;
 
       const getPaintingByIdFullRoute = `${getPaintingsEndpoint}${paintingId}`;
 
-      const response = await request(app).get(getPaintingByIdFullRoute);
+      const response: SupertestPaintingRequestResponse = await request(app).get(
+        getPaintingByIdFullRoute
+      );
 
-      delete response.body.painting.id;
-      delete response.body.painting.__v;
+      const predictablePaintingResponse =
+        deleteDatabaseInsertedUnpredictableProperties(response.body.painting);
 
-      expect(response.body.painting).toStrictEqual(expectedPaintingsResponse);
+      expect(predictablePaintingResponse).toStrictEqual(
+        expectedPaintingsResponse
+      );
     });
   });
 });
